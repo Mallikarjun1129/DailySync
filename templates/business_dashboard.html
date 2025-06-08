@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Business Dashboard{% endblock %}
+
+{% block navbar_title %}Business Dashboard{% endblock %}
+
+{% block navbar_menu %}
+    <a href="{{ url_for('diary') }}">Diary</a>
+    <a href="{{ url_for('list_tasks') }}">Tasks</a>
+    <a href="{{ url_for('add_task') }}">Add Task</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid">
+    <div class="card">
+        <h2>Task Overview</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>{{ total_tasks }}</h3>
+                <p>Total Tasks</p>
+            </div>
+            <div class="stat-item">
+                <h3>{{ pending_tasks }}</h3>
+                <p>Pending Tasks</p>
+            </div>
+            <div class="stat-item">
+                <h3>{{ completed_tasks }}</h3>
+                <p>Completed Tasks</p>
+            </div>
+        </div>
+        <a href="{{ url_for('list_tasks') }}" class="btn-primary">View All Tasks</a>
+    </div>
+
+    <div class="card">
+        <h2>Diary Overview</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>{{ total_entries }}</h3>
+                <p>Total Entries</p>
+            </div>
+            <div class="stat-item">
+                <h3>{{ this_month_entries }}</h3>
+                <p>This Month</p>
+            </div>
+        </div>
+        <a href="{{ url_for('diary') }}" class="btn-primary">View Diary</a>
+    </div>
+
+    <div class="card">
+        <h2>Priority Tasks</h2>
+        <div class="task-list">
+            {% for task in priority_tasks %}
+            <div class="task-item priority-{{ task.priority }}">
+                <h4>{{ task.name }}</h4>
+                <p>Due: {{ task.due_date }}</p>
+                <p>Priority: {{ task.priority }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('add_task') }}" class="btn-primary">Add New Task</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 15px;
+        background-color: var(--card);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .stat-item h3 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 1.8em;
+    }
+
+    .stat-item p {
+        margin: 5px 0 0 0;
+        color: var(--text);
+    }
+
+    .task-list {
+        margin: 20px 0;
+    }
+
+    .task-item {
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: var(--card);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .task-item h4 {
+        margin: 0;
+        color: var(--text);
+    }
+
+    .task-item p {
+        margin: 5px 0 0 0;
+        color: var(--text);
+        font-size: 0.9em;
+    }
+
+    .alert {
+        padding: 15px;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .alert-success {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .alert-error {
+        background-color: #F44336;
+        color: white;
+    }
+</style>
+{% endblock %} 

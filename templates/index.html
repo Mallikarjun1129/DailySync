@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Task & Diary Manager{% endblock %}
+
+{% block navbar_title %}Task & Diary Manager{% endblock %}
+
+{% block navbar_menu %}
+    <a href="{{ url_for('diary') }}">Diary</a>
+    <a href="{{ url_for('list_tasks') }}">Tasks</a>
+    <a href="{{ url_for('add_task') }}">Add Task</a>
+    {% if 'user_id' in session %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>Welcome to Task & Diary Manager</h1>
+    <p>Your all-in-one solution for managing tasks and personal diary entries</p>
+</div>
+
+<div class="features-grid">
+    <div class="feature-card">
+        <h2>Task Management</h2>
+        <p>Create, organize, and track your tasks with ease. Set priorities and due dates to stay on top of your work.</p>
+        <a href="{{ url_for('list_tasks') }}" class="btn-primary">View Tasks</a>
+    </div>
+    
+    <div class="feature-card">
+        <h2>Personal Diary</h2>
+        <p>Keep track of your thoughts, ideas, and daily experiences in your personal digital diary.</p>
+        <a href="{{ url_for('diary') }}" class="btn-primary">Open Diary</a>
+    </div>
+    
+    <div class="feature-card">
+        <h2>Quick Add</h2>
+        <p>Add new tasks or diary entries quickly with our streamlined interface.</p>
+        <a href="{{ url_for('add_task') }}" class="btn-primary">Add New</a>
+    </div>
+</div>
+
+<div class="stats-section">
+    <div class="stat-card">
+        <h3>{{ total_tasks }}</h3>
+        <p>Total Tasks</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ pending_tasks }}</h3>
+        <p>Pending Tasks</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ total_diary_entries }}</h3>
+        <p>Diary Entries</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-section {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 2.5em;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+    
+    .welcome-section p {
+        font-size: 1.2em;
+        color: var(--text);
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    
+    .feature-card {
+        background-color: var(--card);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px var(--shadow);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-card h2 {
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+    
+    .feature-card p {
+        color: var(--text);
+        margin-bottom: 20px;
+    }
+    
+    .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    
+    .stat-card {
+        background-color: var(--card);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px var(--shadow);
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .stat-card h3 {
+        font-size: 2em;
+        color: var(--primary);
+        margin: 0;
+    }
+    
+    .stat-card p {
+        color: var(--text);
+        margin: 5px 0 0 0;
+    }
+</style>
+{% endblock %} 

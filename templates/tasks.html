@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block navbar_title %}Tasks{% endblock %}
+
+{% block navbar_menu %}
+    <a href="{{ url_for('add_task') }}">Add Task</a>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('diary') }}">Diary</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="search-filter">
+    <form method="GET" action="{{ url_for('list_tasks') }}">
+        <input type="text" name="search" placeholder="Search tasks..." value="{{ request.args.get('search', '') }}">
+        <select name="status">
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+        </select>
+        <select name="priority">
+            <option value="">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <select name="sort">
+            <option value="due_date">Sort by Due Date</option>
+            <option value="priority">Sort by Priority</option>
+        </select>
+        <button type="submit" class="btn-primary">Apply</button>
+    </form>
+</div>
+
+<div class="download-button">
+    <a href="{{ url_for('download_tasks') }}" class="btn-primary">Download Tasks as Text</a>
+</div>
+
+<div class="tasks-list">
+    {% for task in tasks %}
+    <div class="task-card priority-{{ task.priority }}">
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.description }}</p>
+        <div class="task-meta">
+            <span class="status-badge status-{{ task.status }}">{{ task.status }}</span>
+            <span class="priority-badge priority-{{ task.priority }}">{{ task.priority }}</span>
+            <span class="due-date">Due: {{ task.due_date }}</span>
+        </div>
+        <div class="action-buttons">
+            <a href="{{ url_for('edit_task', task_id=task._id) }}" class="btn-primary">Edit</a>
+            <form method="GET" action="{{ url_for('delete_task', task_id=task._id) }}" style="display: inline;">
+                <button type="submit" class="btn-secondary">Delete</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .search-filter {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .search-filter input,
+    .search-filter select {
+        padding: 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background-color: var(--card);
+        color: var(--text);
+    }
+    
+    .download-button {
+        margin-bottom: 20px;
+    }
+    
+    .tasks-list {
+        display: grid;
+        gap: 20px;
+    }
+    
+    .task-card {
+        background-color: var(--card);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--shadow);
+        padding: 1.5rem;
+    }
+    
+    .task-card h2 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 1.2em;
+    }
+    
+    .task-card p {
+        margin: 10px 0;
+        color: var(--text);
+    }
+    
+    .task-meta {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        flex-wrap: wrap;
+    }
+    
+    .status-badge,
+    .priority-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+    }
+    
+    .status-pending {
+        background-color: var(--warning);
+        color: var(--text);
+    }
+    
+    .status-completed {
+        background-color: var(--success);
+        color: white;
+    }
+    
+    .priority-high {
+        border-left: 4px solid var(--error);
+    }
+    
+    .priority-medium {
+        border-left: 4px solid var(--warning);
+    }
+    
+    .priority-low {
+        border-left: 4px solid var(--success);
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+</style>
+{% endblock %} 

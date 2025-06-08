@@ -1,0 +1,294 @@
+/* Global Theme Variables */
+:root {
+    /* Light Mode (Default) */
+    --bg: #F9FAFB;
+    --card: #FFFFFF;
+    --text: #333333;
+    --primary: #4CAF50;
+    --secondary: #E0E0E0;
+    --accent: #2196F3;
+    --border: #E0E0E0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --success: #4CAF50;
+    --error: #F44336;
+    --warning: #FFC107;
+    --info: #2196F3;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --bg: #121212;
+    --card: #1E1E1E;
+    --text: #EEEEEE;
+    --primary: #BB86FC;
+    --secondary: #03DAC6;
+    --accent: #CF6679;
+    --border: #333333;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --success: #81C784;
+    --error: #E57373;
+    --warning: #FFB74D;
+    --info: #64B5F6;
+}
+
+/* Student Theme */
+[data-theme="student"] {
+    --primary: #3F51B5;
+    --secondary: #AED581;
+    --bg: #F3F6FC;
+    --text: #1A237E;
+    --accent: #FFCA28;
+    --card: #FFFFFF;
+    --border: #E8EAF6;
+    --shadow: rgba(63, 81, 181, 0.1);
+    --success: #4CAF50;
+    --error: #F44336;
+    --warning: #FFC107;
+    --info: #2196F3;
+}
+
+/* Teacher Theme */
+[data-theme="teacher"] {
+    --primary: #6D4C41;
+    --secondary: #FFB74D;
+    --bg: #FFF8E1;
+    --text: #3E2723;
+    --accent: #8D6E63;
+    --card: #FFFFFF;
+    --border: #D7CCC8;
+    --shadow: rgba(109, 76, 65, 0.1);
+    --success: #4CAF50;
+    --error: #F44336;
+    --warning: #FFC107;
+    --info: #2196F3;
+}
+
+/* Business Professional Theme */
+[data-theme="business"] {
+    --primary: #0D47A1;
+    --secondary: #607D8B;
+    --bg: #ECEFF1;
+    --text: #263238;
+    --accent: #FF7043;
+    --card: #FFFFFF;
+    --border: #CFD8DC;
+    --shadow: rgba(13, 71, 161, 0.1);
+    --success: #4CAF50;
+    --error: #F44336;
+    --warning: #FFC107;
+    --info: #2196F3;
+}
+
+/* Creative Mode */
+[data-theme="creative"] {
+    --primary: #F06292;
+    --secondary: #BA68C8;
+    --accent: #FFEB3B;
+    --bg: linear-gradient(135deg, #FCE4EC 0%, #E1BEE7 100%);
+    --text: #4A148C;
+    --card: #FFFFFF;
+    --border: #F8BBD0;
+    --shadow: rgba(240, 98, 146, 0.1);
+}
+
+/* Common Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 2px 4px var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: var(--accent);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 4px var(--shadow);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    color: var(--text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background-color: var(--border);
+    transform: translateY(-1px);
+}
+
+/* Status Tags */
+.status-tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-completed {
+    background-color: var(--success);
+    color: white;
+}
+
+.status-pending {
+    background-color: var(--warning);
+    color: var(--text);
+}
+
+.status-overdue {
+    background-color: var(--error);
+    color: white;
+}
+
+/* Priority Indicators */
+.priority-high {
+    border-left: 4px solid var(--error);
+}
+
+.priority-medium {
+    border-left: 4px solid var(--warning);
+}
+
+.priority-low {
+    border-left: 4px solid var(--success);
+}
+
+/* Mood Indicators */
+.mood-calm {
+    color: #2196F3;
+}
+
+.mood-neutral {
+    color: #9E9E9E;
+}
+
+.mood-stress {
+    color: #F44336;
+}
+
+.mood-happy {
+    color: #F06292;
+}
+
+/* Form Elements */
+input, textarea, select {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--shadow);
+    outline: none;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--accent);
+}
+
+/* Alert Messages */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.alert-success {
+    background-color: var(--success);
+    color: white;
+}
+
+.alert-error {
+    background-color: var(--error);
+    color: white;
+}
+
+.alert-warning {
+    background-color: var(--warning);
+    color: var(--text);
+}
+
+.alert-info {
+    background-color: var(--info);
+    color: white;
+} 
